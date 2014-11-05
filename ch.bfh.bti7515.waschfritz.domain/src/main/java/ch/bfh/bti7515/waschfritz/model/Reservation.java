@@ -8,7 +8,19 @@ import java.util.Date;
  */
 @Entity
 public class Reservation {
+    @GeneratedValue
+    @Id
     private Long id;
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Machine machine;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Tenant tenant;
 
     @GeneratedValue
     @Id
@@ -20,9 +32,6 @@ public class Reservation {
         this.id = id;
     }
 
-    private Date startDate;
-
-    @Basic
     public Date getStartDate() {
         return startDate;
     }
@@ -31,20 +40,16 @@ public class Reservation {
         this.startDate = startDate;
     }
 
-    private Date endDat;
 
-    @Basic
-    public Date getEndDat() {
-        return endDat;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEndDat(Date endDat) {
-        this.endDat = endDat;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
-    private Machine machine;
 
-    @OneToOne
     public Machine getMachine() {
         return machine;
     }
@@ -53,9 +58,7 @@ public class Reservation {
         this.machine = machine;
     }
 
-    private Tenant tenant;
 
-    @ManyToOne
     public Tenant getTenant() {
         return tenant;
     }

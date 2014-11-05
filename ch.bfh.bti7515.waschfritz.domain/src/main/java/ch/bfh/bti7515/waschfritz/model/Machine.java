@@ -8,6 +8,11 @@ import javax.persistence.*;
 @Entity
 public class Machine {
     private Long id;
+    private String name;
+    private String type;
+
+
+    private Reservation reservation;
 
     @GeneratedValue
     @Id
@@ -19,8 +24,6 @@ public class Machine {
         this.id = id;
     }
 
-    private String name;
-
     @Basic
     public String getName() {
         return name;
@@ -30,8 +33,6 @@ public class Machine {
         this.name = name;
     }
 
-    private String type;
-
     @Basic
     public String getType() {
         return type;
@@ -40,8 +41,6 @@ public class Machine {
     public void setType(String type) {
         this.type = type;
     }
-
-    private Reservation reservation;
 
     @OneToOne(mappedBy = "machine")
     public Reservation getReservation() {

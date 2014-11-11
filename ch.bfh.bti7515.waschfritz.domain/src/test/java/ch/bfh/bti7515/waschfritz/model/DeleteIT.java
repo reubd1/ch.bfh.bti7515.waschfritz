@@ -10,24 +10,23 @@ import java.util.List;
 import static junit.framework.TestCase.assertEquals;
 
 /**
- * Created by adrian on 04.11.14.
+ * Created by adrian on 11.11.14.
  */
-public class ReadIT {
+public class DeleteIT {
 
     @Test
     public void test() {
-
         EntityManager em = Persistence.createEntityManagerFactory("ch.bfh.bti7515.waschfritz.domain").createEntityManager();
-
         Query query = em.createQuery("select r from Reservation r");
 
         List<Reservation> reservations = query.getResultList();
 
-        System.out.println(reservations.get(0).getTenant().getName());
+        Reservation res = reservations.get(0);
 
-        Reservation reservation = reservations.get(0);
-        assertEquals("Super Machine", reservation.getMachine().getName());
-        assertEquals("Hans Muster", reservation.getTenant().getName());
+        assertEquals(1, reservations.size());
 
+        em.getTransaction().begin();
+        em.remove(res);
+        em.getTransaction().commit();
     }
 }

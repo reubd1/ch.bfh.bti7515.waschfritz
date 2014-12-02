@@ -1,4 +1,5 @@
-import ch.bfh.bti7515.waschfritz.service.MachineService;
+package ch.bfh.bti7515.waschfritz.service;
+
 import ch.bfh.bti7515.waschfritz.service.dto.MachineDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,8 +42,8 @@ public class MachineServiceIT {
         assertEquals("New Name", readMachine.getName());
 
         machineService.delete(updatedMachine);
-        MachineDTO deletedMachnine = machineService.read(readMachine.getId());
-        assertNull(deletedMachnine);
+        MachineDTO deletedMachine = machineService.read(readMachine.getId());
+        assertNull(deletedMachine);
 
 
     }

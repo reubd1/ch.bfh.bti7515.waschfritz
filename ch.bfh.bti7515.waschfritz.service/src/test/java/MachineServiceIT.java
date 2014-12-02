@@ -6,7 +6,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
+import java.util.Collection;
 
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.TestCase.assertEquals;
 
@@ -29,6 +31,9 @@ public class MachineServiceIT {
 
         MachineDTO readMachine = machineService.read(machineDTO.getId());
         assertEquals("Mach1", readMachine.getName());
+
+        Collection<MachineDTO> machineDTOs = machineService.list();
+        assertFalse(machineDTOs.isEmpty());
 
         readMachine.setName("New Name");
         readMachine = machineService.update(readMachine);

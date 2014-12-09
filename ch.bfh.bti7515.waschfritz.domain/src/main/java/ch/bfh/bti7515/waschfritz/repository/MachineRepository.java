@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * Created by adrian on 18.11.14.
  */
+//@Repository
 public interface MachineRepository extends CrudRepository<Machine, Long> {
 
 }

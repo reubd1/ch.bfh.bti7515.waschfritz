@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.1.xsd">
 
-    <jpa:repositories base-package="ch.bfh.bti7515.waschfritz.repository"/>
+    <jpa:repositories base-package="ch.bfh.bti7515.waschfritz.repository" entity-manager-factory-ref="emf"/>
 
     <!-- *** Datasource *** -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">

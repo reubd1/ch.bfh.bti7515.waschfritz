@@ -1,14 +1,11 @@
 package ch.bfh.bti7515.waschfritz.service.dto;
 
-import java.util.List;
-
-
 public class TenantDTO {
 
     private Long id;
     private String name;
     private String address;
-    private List<ReservationDTO> reservationDTOs;
+    //private List<ReservationDTO> reservationDTOs;
 
     public Long getId() {
         return id;
@@ -34,11 +31,12 @@ public class TenantDTO {
         this.address = address;
     }
 
-    public List<ReservationDTO> getReservationDTOs() {
+    /*public List<ReservationDTO> getReservationDTOs() {
         return reservationDTOs;
     }
 
     public void setReservationDTOs(List<ReservationDTO> reservationDTOs) {
         this.reservationDTOs = reservationDTOs;
     }
+    */
 }

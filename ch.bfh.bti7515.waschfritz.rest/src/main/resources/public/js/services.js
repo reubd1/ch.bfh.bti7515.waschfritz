@@ -6,3 +6,19 @@ machineServices.factory('Machine', ['$resource', function ($resource) {
         'update': {method: 'PUT'}
     });
 }]);
+
+
+var reservationServices = angular.module('reservationServices', ['ngResource']);
+reservationServices.factory('Reservation', ['$resource', function ($resource) {
+    return $resource('reservations/:reservationId', {reservationId: '@id'}, {
+        'update': {method: 'PUT'}
+    });
+}]);
+
+
+var tenantService = angular.module('tenantServices', ['ngResource']);
+tenantService.factory('Tenant', ['$resource', function ($resource) {
+    return $resource('tenants/:tenantId', {tenantId: '@id'}, {
+        'update': {method: 'PUT'}
+    });
+}]);

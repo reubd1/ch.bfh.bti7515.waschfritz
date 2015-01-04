@@ -1,7 +1,8 @@
 package ch.bfh.bti7515.waschfritz.model;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by reubid on 04.11.14.
@@ -9,10 +10,18 @@ import java.util.List;
 @Entity
 public class Tenant {
 
-    private Long id;
-
     @GeneratedValue
     @Id
+    private Long id;
+
+    private String name;
+    private String address;
+
+
+    //@OneToMany(mappedBy = "tenant")
+    //private List<Reservation> reservations;
+
+
     public Long getId() {
         return id;
     }
@@ -21,9 +30,8 @@ public class Tenant {
         this.id = id;
     }
 
-    private String name;
 
-    @Basic
+    //@Basic
     public String getName() {
         return name;
     }
@@ -32,9 +40,8 @@ public class Tenant {
         this.name = name;
     }
 
-    private String address;
 
-    @Basic
+    //@Basic
     public String getAddress() {
         return address;
     }
@@ -43,14 +50,13 @@ public class Tenant {
         this.address = address;
     }
 
-    private List<Reservation> reservations;
 
-    @OneToMany
-    public List<Reservation> getReservations() {
+    //@OneToMany
+    /*public List<Reservation> getReservations() {
         return reservations;
     }
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
-    }
+    }*/
 }

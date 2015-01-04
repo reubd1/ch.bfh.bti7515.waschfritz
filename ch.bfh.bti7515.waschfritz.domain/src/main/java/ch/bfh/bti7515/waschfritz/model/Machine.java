@@ -1,21 +1,27 @@
 package ch.bfh.bti7515.waschfritz.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by reubid on 04.11.14.
  */
 @Entity
 public class Machine {
-    private Long id;
-    private String name;
-    private String type;
-
-
-    private Reservation reservation;
 
     @GeneratedValue
     @Id
+    private Long id;
+
+
+    private String name;
+    private String type;
+
+    //@OneToMany(mappedBy = "machine")
+    //private List<Reservation> reservations;
+
+
     public Long getId() {
         return id;
     }
@@ -24,7 +30,7 @@ public class Machine {
         this.id = id;
     }
 
-    @Basic
+    //@Basic
     public String getName() {
         return name;
     }
@@ -33,7 +39,7 @@ public class Machine {
         this.name = name;
     }
 
-    @Basic
+    //@Basic
     public String getType() {
         return type;
     }
@@ -42,12 +48,12 @@ public class Machine {
         this.type = type;
     }
 
-    @OneToOne(mappedBy = "machine")
-    public Reservation getReservation() {
-        return reservation;
+/*
+    public List<Reservation> getReservations() {
+        return reservations;
     }
 
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
-    }
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }*/
 }

@@ -24,11 +24,11 @@ public class CreateIT {
         Reservation reservation = new Reservation();
 
 
-        reservation.setStartDate(new GregorianCalendar(2014,11,04,14,00,00).getTime());
+        reservation.setStartDate(new GregorianCalendar(2014, 11, 04, 14, 00, 00).getTime());
         reservation.setEndDate(new GregorianCalendar(2014, 11, 04, 20, 00, 00).getTime());
 
         reservation.setMachine(machine);
-        reservation.setTenant(tenant);
+        //reservation.setTenant(tenant);
 
         EntityManager em = Persistence.createEntityManagerFactory("ch.bfh.bti7515.waschfritz.domain").createEntityManager();
 

@@ -7,7 +7,7 @@ public class MachineDTO {
     private String type;
 
 
-    private ReservationDTO reservationDTO;
+    //private ReservationDTO reservationDTO;
 
     public Long getId() {
         return id;
@@ -34,11 +34,12 @@ public class MachineDTO {
         this.type = type;
     }
 
-    public ReservationDTO getReservationDTO() {
+    /*public ReservationDTO getReservationDTO() {
         return reservationDTO;
     }
 
     public void setReservationDTO(ReservationDTO reservationDTO) {
         this.reservationDTO = reservationDTO;
     }
+    */
 }

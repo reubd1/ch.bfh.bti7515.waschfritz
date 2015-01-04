@@ -8,9 +8,9 @@ public class ReservationDTO {
     private Date startDate;
     private Date endDate;
 
-    private MachineDTO machineDTO;
+    private MachineDTO machine;
 
-    private TenantDTO tenantDTO;
+    private TenantDTO tenant;
 
     public Long getId() {
         return id;
@@ -38,20 +38,20 @@ public class ReservationDTO {
     }
 
 
-    public MachineDTO getMachineDTO() {
-        return machineDTO;
+    public MachineDTO getMachine() {
+        return machine;
     }
 
-    public void setMachineDTO(MachineDTO machineDTO) {
-        this.machineDTO = machineDTO;
+    public void setMachine(MachineDTO machine) {
+        this.machine = machine;
     }
 
 
-    public TenantDTO getTenantDTO() {
-        return tenantDTO;
+    public TenantDTO getTenant() {
+        return tenant;
     }
 
-    public void setTenantDTO(TenantDTO tenantDTO) {
-        this.tenantDTO = tenantDTO;
+    public void setTenant(TenantDTO tenant) {
+        this.tenant = tenant;
     }
 }

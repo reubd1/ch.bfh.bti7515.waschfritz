@@ -16,14 +16,14 @@ public class Reservation {
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Machine machine;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Tenant tenant;
 
-    @GeneratedValue
-    @Id
+    //@GeneratedValue
+    //@Id
     public Long getId() {
         return id;
     }
@@ -66,4 +66,5 @@ public class Reservation {
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
     }
+
 }

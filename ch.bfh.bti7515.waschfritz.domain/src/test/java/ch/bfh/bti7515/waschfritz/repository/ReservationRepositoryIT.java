@@ -5,17 +5,13 @@ import ch.bfh.bti7515.waschfritz.model.Reservation;
 import ch.bfh.bti7515.waschfritz.model.Tenant;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.support.ResourceEditorRegistrar;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
-
 import java.util.GregorianCalendar;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by adrian on 18.11.14.
@@ -41,11 +37,11 @@ public class ReservationRepositoryIT {
 
         Reservation reservation = new Reservation();
 
-        reservation.setStartDate(new GregorianCalendar(2014,11,04,14,00,00).getTime());
+        reservation.setStartDate(new GregorianCalendar(2014, 11, 04, 14, 00, 00).getTime());
         reservation.setEndDate(new GregorianCalendar(2014, 11, 04, 20, 00, 00).getTime());
 
         reservation.setMachine(machine);
-        reservation.setTenant(tenant);
+        //reservation.setTenant(tenant);
 
         reservationRepository.save(reservation);
 

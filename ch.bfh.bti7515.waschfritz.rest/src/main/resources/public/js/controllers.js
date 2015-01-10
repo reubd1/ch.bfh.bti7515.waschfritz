@@ -9,9 +9,12 @@ machineControllers.controller('MachineListController', ['$scope', 'Machine', fun
 
 
     $scope.addMachine = function () {
-        $scope.currentMachine = Machine.save($scope.currentMachine);
-        $scope.machines.push($scope.currentMachine);
-        $scope.currentMachine = {};
+        // check to make sure the form is completely valid
+        if ($scope.machineForm.$valid) {
+            $scope.currentMachine = Machine.save($scope.currentMachine);
+            $scope.machines.push($scope.currentMachine);
+            $scope.currentMachine = {};
+        }
     }
 
     $scope.deleteMachine = function (machine) {
@@ -93,5 +96,55 @@ calControllers.controller('CalController', ['$scope', 'Reservation', 'Machine', 
         minuteStep: [1, 5, 10, 15, 25, 30]
     };
 
+
+}]);
+
+
+
+    var app = angular.module('tabCtrl', []);
+
+    app.controller('TabController', function () {
+        this.tab = 1;
+
+        this.setTab = function (tabId) {
+            this.tab = tabId;
+        };
+
+        this.isSet = function (tabId) {
+            return this.tab === tabId;
+        };
+    });
+
+// create angular app
+var validationControllers = angular.module('validationCtrl', []);
+
+// create angular controller
+validationControllers.controller('TenantListController', ['$scope', 'Tenant', function ($scope, Tenant) {
+
+
+    $scope.currentTenant = new Tenant();
+    $scope.tenants = Tenant.query();
+
+    $scope.eventSources = [];
+
+
+    // function to submit the form after all validation has occurred
+    $scope.addTenant = function() {
+        // check to make sure the form is completely valid
+        if ($scope.tenantForm.$valid) {
+            $scope.currentTenant = Tenant.save($scope.currentTenant);
+            $scope.tenants.push($scope.currentTenant);
+            $scope.currentTenant = {};
+        }
+
+    }
+
+    $scope.deleteTenant = function (tenant) {
+        Tenant.remove({tenantId: tenant.id});
+
+        // remove tenant from array
+        var index = $scope.tenants.indexOf(tenant);
+        $scope.tenants.splice(index, 1);
+    }
 
 }]);

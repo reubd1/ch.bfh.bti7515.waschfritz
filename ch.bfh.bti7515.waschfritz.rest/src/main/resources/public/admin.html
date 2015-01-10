@@ -12,49 +12,127 @@
 
     <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
 
+
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
 </head>
 <body>
-<div class="container" ng-controller="MachineListController">
-    <h2>Machines</h2>
 
-    <table class="table table-hover">
-        <thead>
-        <th>Name</th>
-        <th>Type</th>
-        <th></th>
-        </thead>
-        <tr ng-repeat="machine in machines">
-            <td>{{machine.name}}</td>
-            <td>{{machine.type}}</td>
-            <td>
-                <button type="submit" class="btn btn-default" ng-click="deleteMachine(machine)">Delete</button>
-            </td>
-        </tr>
-    </table>
+<div class="container">
+    <section ng-app="tabCtrl" ng-controller="TabController as tab">
+        <ul class="nav nav-pills">
+            <li ng-class="{active:tab.isSet(1)}"><a href ng-click="tab.setTab(1)">Machines</a></li>
+            <li ng-class="{active:tab.isSet(2)}"><a href ng-click="tab.setTab(2)">Tenants</a></li>
+        </ul>
+
+        <div ng-show="tab.isSet(1)">
+            <div class="container" ng-controller="MachineListController">
+                <h2>Machine List</h2>
+
+                <table class="table table-hover">
+                    <thead>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th></th>
+                    </thead>
+                    <tr ng-repeat="machine in machines">
+                        <td>{{machine.name}}</td>
+                        <td>{{machine.type}}</td>
+                        <td>
+                            <button type="submit" class="btn btn-default" ng-click="deleteMachine(machine)">Delete</button>
+                        </td>
+                    </tr>
+                </table>
 
 
-    <form class="form-horizontal" ng-submit="addMachine()">
-        <div class="form-group">
-            <label for="inputMachineName" class="control-label col-xs-2">Name</label>
+                <div class="row">
 
-            <div class="col-xs-10">
-                <input type="text" class="form-control" id="inputMachineName" ng-model="currentMachine.name">
+                    <div class="col-sm-6">
+                        <!-- =================================================================== -->
+                        <!-- FORM ============================================================== -->
+                        <!-- =================================================================== -->
+                        <h2>Add Machine</h2>
+                        <form name="machineForm" ng-submit="addMachine()" novalidate>
+
+                            <!-- Machine -->
+                            <div class="form-group" ng-class="{ 'has-error' : machineForm.machine.$invalid && !machineForm.machine.$pristine }">
+                                <label>Machine name</label>
+                                <input type="text" name="name" class="form-control" ng-model="currentMachine.name" required>
+                                <p ng-show="machineForm.name.$invalid && !machineForm.name.$pristine" class="help-block">Machine is required.</p>
+                            </div>
+
+                            <!-- Type -->
+                            <div class="form-group" ng-class="{ 'has-error' : machineForm.type.$invalid && !machineForm.type.$pristine }">
+                                <label>Type</label>
+                                <input type="text" name="type" class="form-control" ng-model="currentMachine.type" required>
+                                <p ng-show="machineForm.type.$invalid && !machineForm.type.$pristine" class="help-block">Type is required.</p>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" ng-disabled="machineForm.$invalid">Submit</button>
+
+                        </form>
+                    </div>
+                </div>
+
+
             </div>
         </div>
-        <div class="form-group">
-            <label for="inputMachineType" class="control-label col-xs-2">Type</label>
+        <div ng-show="tab.isSet(2)">
 
-            <div class="col-xs-10">
-                <input type="text" class="form-control" id="inputMachineType" ng-model="currentMachine.type">
+            <div class="container" ng-controller="TenantListController">
+                <h2>Tenant List</h2>
+
+                <table class="table table-hover">
+                    <thead>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th></th>
+                    </thead>
+                    <tr ng-repeat="tenant in tenants">
+                        <td>{{tenant.name}}</td>
+                        <td>{{tenant.address}}</td>
+                        <td>
+                            <button type="submit" class="btn btn-default" ng-click="deleteTenant(tenant)">Delete</button>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <div class="row">
+
+                        <div class="col-sm-6">
+                            <!-- =================================================================== -->
+                            <!-- FORM ============================================================== -->
+                            <!-- =================================================================== -->
+                            <h2>Add Tenant</h2>
+                            <form name="tenantForm" ng-submit="addTenant()" novalidate>
+
+                                <!-- NAME -->
+                                <div class="form-group" ng-class="{ 'has-error' : tenantForm.name.$invalid && !tenantForm.name.$pristine }">
+                                    <label>Name</label>
+                                    <input type="text" name="name" class="form-control" ng-model="currentTenant.name" required>
+                                    <p ng-show="tenantForm.name.$invalid && !tenantForm.name.$pristine" class="help-block">Name is required.</p>
+                                </div>
+
+                                <!-- Address -->
+                                <div class="form-group" ng-class="{ 'has-error' : tenantForm.address.$invalid && !tenantForm.address.$pristine }">
+                                    <label>Address</label>
+                                    <input type="text" name="address" class="form-control" ng-model="currentTenant.address" ng-minlength="3" ng-maxlength="15">
+                                    <p ng-show="tenantForm.address.$error.minlength" class="help-block">Address is too short.</p>
+                                    <p ng-show="tenantForm.address.$error.maxlength" class="help-block">Address is too long.</p>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" ng-disabled="tenantForm.$invalid">Submit</button>
+
+                            </form>
+                        </div>
+                </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-default">Save</button>
-    </form>
-
-
+    </section>
 </div>
+
+
 </body>
 </html>

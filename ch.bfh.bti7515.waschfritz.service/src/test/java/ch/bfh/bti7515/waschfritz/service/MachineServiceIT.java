@@ -1,6 +1,8 @@
 package ch.bfh.bti7515.waschfritz.service;
 
 import ch.bfh.bti7515.waschfritz.service.dto.MachineDTO;
+import ch.bfh.bti7515.waschfritz.service.dto.ReservationDTO;
+import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -8,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.Date;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNull;
@@ -49,4 +52,44 @@ public class MachineServiceIT {
     }
 
 
+    /**
+     * Created by reubid on 02.12.14.
+     */
+
+    @RunWith(SpringJUnit4ClassRunner.class)
+    @ContextConfiguration("/serviceContext.xml")
+    public static class ReservationServiceIT {
+
+
+            @Inject
+            private ReservationService reservationService;
+
+            @Test
+            public void test() {
+
+                //create
+                ReservationDTO newReservation = new ReservationDTO();
+                newReservation.setEndDate(new Date());
+                newReservation = reservationService.create(newReservation);
+
+                //read
+                ReservationDTO readReservation = reservationService.read(newReservation.getId());
+                Assert.assertTrue(newReservation.getEndDate().equals(readReservation.getEndDate()));
+
+                //update
+                readReservation.setEndDate(new Date());
+                readReservation = reservationService.update(readReservation);
+                ReservationDTO updatedReservation = reservationService.read(readReservation.getId());
+                Assert.assertTrue(readReservation.getEndDate().equals(updatedReservation.getEndDate()));
+
+                //delete
+                reservationService.delete(updatedReservation);
+                ReservationDTO deleteReservation = reservationService.read(readReservation.getId());
+                assertNull(deleteReservation);
+
+            }
+
+
+
+    }
 }

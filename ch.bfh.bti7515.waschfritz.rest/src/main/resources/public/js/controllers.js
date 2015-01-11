@@ -32,8 +32,15 @@ calControllers.controller('CalController', ['$scope', 'Reservation', 'Machine', 
 
     $scope.tenants = Tenant.query();
     $scope.machines = Machine.query();
-
-    $scope.currentReservation = {};
+    
+    var initDates = function() {
+        $scope.currentReservation = {};
+        $scope.currentReservation.startDate = new Date();
+        $scope.currentReservation.endDate = new Date(new Date().getTime() + 2*60*60*1000); // Now + 2 hrs        
+        
+    };
+    
+    initDates();
 
     $scope.events = [];
     Reservation.query().$promise.then(
@@ -65,6 +72,10 @@ calControllers.controller('CalController', ['$scope', 'Reservation', 'Machine', 
                     if(bool) {
                         var startDate = new Date(value.startDate);
                         var endDate = new Date(value.endDate);
+                        // TODO: check only if same machine
+                        var machine = value.machine;
+                        console.log("current machineId " + $scope.currentReservation.machine.id);
+                        console.log("existing " + machine.id);
                         //check if there is not already a booking in the choosen daterange
                         if ((newStartDate > endDate && newEndDate > endDate) || (newStartDate < startDate && newEndDate < startDate)) {
                            bool = true;
@@ -96,7 +107,7 @@ calControllers.controller('CalController', ['$scope', 'Reservation', 'Machine', 
            alert("Reservation is not valid");
         }
 
-            $scope.currentReservation = {};
+            initDates();
         },3000);
 
 

@@ -24,6 +24,7 @@
         <ul class="nav nav-pills">
             <li ng-class="{active:tab.isSet(1)}"><a href ng-click="tab.setTab(1)">Machines</a></li>
             <li ng-class="{active:tab.isSet(2)}"><a href ng-click="tab.setTab(2)">Tenants</a></li>
+            <li ng-class="{active:tab.isSet(3)}"><a href ng-click="tab.setTab(3)">Reservations</a></li>
         </ul>
 
         <div ng-show="tab.isSet(1)">
@@ -128,6 +129,31 @@
                             </form>
                         </div>
                 </div>
+            </div>
+        </div>
+        <div ng-show="tab.isSet(3)">
+
+            <div class="container" ng-controller="ReservationListController">
+                <h2>Reservation List</h2>
+
+                <table class="table table-hover">
+                    <thead>
+                    <th>Machine</th>
+                    <th>Tenant</th>
+                    <th>from</th>
+                    <th>to</th>
+                    <th></th>
+                    </thead>
+                    <tr ng-repeat="reservation in reservations">
+                        <td>{{reservation.machine.name}}</td>
+                        <td>{{reservation.tenant.name}}</td>
+                        <td>{{reservation.startDate | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+                        <td>{{reservation.endDate | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+                        <td>
+                            <button type="submit" class="btn btn-default" ng-click="deleteReservation(reservation)">Delete</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </section>

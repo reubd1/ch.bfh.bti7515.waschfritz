@@ -53,19 +53,49 @@ calControllers.controller('CalController', ['$scope', 'Reservation', 'Machine', 
     $scope.addReservation = function () {
 
         console.log($scope.currentReservation);
+        bool = true;
+        var newStartDate = $scope.currentReservation.startDate;
+        var newEndDate = $scope.currentReservation.endDate;
 
-        // update local
-        $scope.events.push({
-            title: $scope.currentReservation.machine.name + ' - ' + $scope.currentReservation.tenant.name,
-            start: $scope.currentReservation.startDate, // ??
-            end: $scope.currentReservation.endDate,     // ??
-            allDay: false
-        });
 
-        // REST call
-        $scope.currentReservation = Reservation.save($scope.currentReservation);
+        //loop trough all existing reservations and compare existing dates with choosen daterange
+        $scope.events = [];
+        Reservation.query().$promise.then(
+            function (data) {
+                angular.forEach(data, function (value, key) {
+                    if(bool) {
+                        var startDate = new Date(value.startDate);
+                        var endDate = new Date(value.endDate);
+                        //check if there is not already a booking in the choosen daterange
+                        if ((newStartDate > endDate && newEndDate > endDate) || (newStartDate < startDate && newEndDate < startDate)) {
+                           bool = true;
+                        }
+                        else {
+                           bool = false;
+                            alert("There is already a booking for this timerange");
+                        }
+                    }
+                });
+            });
 
-        $scope.currentReservation = {};
+        setTimeout(function() {
+        if(bool) {
+
+            // update local
+            $scope.events.push({
+                title: $scope.currentReservation.machine.name + ' - ' + $scope.currentReservation.tenant.name,
+                start: $scope.currentReservation.startDate, // ??
+                end: $scope.currentReservation.endDate,     // ??
+                allDay: false
+            });
+            // REST call
+            $scope.currentReservation = Reservation.save($scope.currentReservation);
+
+        }
+
+            $scope.currentReservation = {};
+        },3000);
+
 
     };
 
@@ -149,4 +179,22 @@ validationControllers.controller('TenantListController', ['$scope', 'Tenant', fu
         $scope.tenants.splice(index, 1);
     }
 
+}]);
+
+var reservationControllers = angular.module('reservationControllers', []);
+
+reservationControllers.controller('ReservationListController', ['$scope', 'Reservation', function ($scope, Reservation) {
+
+    $scope.currentReservation = new Reservation();
+    $scope.reservations = Reservation.query();
+
+    $scope.eventSources = [];
+
+    $scope.deleteReservation = function (reservation) {
+        Reservation.remove({reservationId: reservation.id});
+
+        // remove reservation from array
+        var index = $scope.reservations.indexOf(reservation);
+        $scope.reservations.splice(index, 1);
+    }
 }]);

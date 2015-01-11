@@ -14,6 +14,7 @@ machineControllers.controller('MachineListController', ['$scope', 'Machine', fun
             $scope.currentMachine = Machine.save($scope.currentMachine);
             $scope.machines.push($scope.currentMachine);
             $scope.currentMachine = {};
+            $scope.machineForm.$setPristine();
         }
     }
 
@@ -135,6 +136,7 @@ validationControllers.controller('TenantListController', ['$scope', 'Tenant', fu
             $scope.currentTenant = Tenant.save($scope.currentTenant);
             $scope.tenants.push($scope.currentTenant);
             $scope.currentTenant = {};
+            $scope.tenantForm.$setPristine();
         }
 
     }

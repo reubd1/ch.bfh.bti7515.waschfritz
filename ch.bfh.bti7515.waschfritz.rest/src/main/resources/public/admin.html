@@ -56,7 +56,7 @@
                         <form name="machineForm" ng-submit="addMachine()" novalidate>
 
                             <!-- Machine -->
-                            <div class="form-group" ng-class="{ 'has-error' : machineForm.machine.$invalid && !machineForm.machine.$pristine }">
+                            <div class="form-group" ng-class="{ 'has-error' : machineForm.name.$invalid && !machineForm.name.$pristine }">
                                 <label>Machine name</label>
                                 <input type="text" name="name" class="form-control" ng-model="currentMachine.name" required>
                                 <p ng-show="machineForm.name.$invalid && !machineForm.name.$pristine" class="help-block">Machine is required.</p>

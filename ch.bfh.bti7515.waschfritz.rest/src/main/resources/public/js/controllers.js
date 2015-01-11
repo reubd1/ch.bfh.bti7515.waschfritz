@@ -59,7 +59,6 @@ calControllers.controller('CalController', ['$scope', 'Reservation', 'Machine', 
 
 
         //loop trough all existing reservations and compare existing dates with choosen daterange
-        $scope.events = [];
         Reservation.query().$promise.then(
             function (data) {
                 angular.forEach(data, function (value, key) {
@@ -79,7 +78,7 @@ calControllers.controller('CalController', ['$scope', 'Reservation', 'Machine', 
             });
 
         setTimeout(function() {
-        if(bool) {
+        if(bool && newEndDate>newStartDate && $scope.dateForm.$valid) {
 
             // update local
             $scope.events.push({
@@ -90,7 +89,11 @@ calControllers.controller('CalController', ['$scope', 'Reservation', 'Machine', 
             });
             // REST call
             $scope.currentReservation = Reservation.save($scope.currentReservation);
+            $scope.dateForm.$setPristine();
 
+        }
+        else{
+           alert("Reservation is not valid");
         }
 
             $scope.currentReservation = {};

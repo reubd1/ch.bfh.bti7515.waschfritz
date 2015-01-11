@@ -31,32 +31,47 @@
 <body>
 <div class="container" ng-controller="CalController">
 
-    <form role="form" ng-submit="addReservation()">
+    <form role="form" name="dateForm" ng-submit="addReservation()">
 
         <div class="form-group">
             <label for="machine">Machine</label>
 
-            <select class="form-control" ng-model="currentReservation.machine"
-                    ng-options="machine.name for machine in machines"></select>
+            <div class="form-group" ng-class="{ 'has-error' : dateForm.machine.$invalid && !dateForm.machine.$pristine }">
+            <select class="form-control" name="machine" ng-model="currentReservation.machine"
+                    ng-options="machine.name for machine in machines" required></select>
+                <p ng-show="dateForm.machine.$invalid && !dateForm.machine.$pristine" class="help-block">Machine is required.</p>
+                </div>
 
             <label for="tenant">Name</label>
-            <select class="form-control" id="tenant" ng-model="currentReservation.tenant"
-                    ng-options="tenant.name for tenant in tenants"></select>
+
+            <div class="form-group" ng-class="{ 'has-error' : dateForm.name.$invalid && !dateForm.name.$pristine }">
+            <select class="form-control" id="tenant" name="tenant" ng-model="currentReservation.tenant"
+                    ng-options="tenant.name for tenant in tenants" required></select>
+            <p ng-show="dateForm.tenant.$invalid && !dateForm.tenant.$pristine" class="help-block">Name is required.</p>
+        </div>
 
             <label for="startDate">Start</label>
-            <datetimepicker ng-model="currentReservation.startDate" id="startDate" show-weeks="showWeeks"
+            <div class="form-group" ng-class="{ 'has-error' : dateForm.startDate.$invalid && !dateForm.startDate.$pristine }">
+
+            <datetimepicker ng-model="currentReservation.startDate" id="startDate" name="startDate" show-weeks="showWeeks"
                             hour-step="hourStep" minute-step="minuteStep" show-meridian="false"
-                            date-format="dd-MMM-yyyy" date-options="dateOptions" readonly-time="false"></datetimepicker>
+                            date-format="dd-MMM-yyyy" date-options="dateOptions" readonly-time="false" required></datetimepicker>
+                <p ng-show="dateForm.startDate.$invalid && !dateForm.startDate.$pristine" class="help-block">StartDate is required.</p>
+            </div>
 
             <label for="endDate">End</label>
-            <datetimepicker ng-model="currentReservation.endDate" id="endDate" show-weeks="showWeeks"
+                <div class="form-group" ng-class="{ 'has-error' : dateForm.endDate.$invalid && !dateForm.endDate.$pristine }">
+
+                <datetimepicker ng-model="currentReservation.endDate" id="endDate" name="endDate" show-weeks="showWeeks"
                             hour-step="hourStep" minute-step="minuteStep" show-meridian="false"
-                            date-format="dd-MMM-yyyy" date-options="dateOptions" readonly-time="false"></datetimepicker>
+                            date-format="dd-MMM-yyyy" date-options="dateOptions" readonly-time="false" required></datetimepicker>
+                    <p ng-show="dateForm.endDate.$invalid && !dateForm.endDate.$pristine" class="help-block">EndDate is required.</p>
+                </div>
 
         </div>
 
 
-        <button type="submit" class="btn btn-default">Add</button>
+        <button type="submit" class="btn btn-default" ng-disabled="dateForm.$invalid">Add</button>
     </form>
 
     <div ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>

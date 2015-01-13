@@ -3,6 +3,8 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Calendar</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/bootstrap/bootstrap.min.js"></script>
 
     <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 
@@ -26,71 +28,103 @@
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
 
+    <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
+    <link href="lib/layout/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="lib/layout/js/jquery.min.js"></script>
+    <script src="lib/layout/js/easyResponsiveTabs.js"></script>
 
 </head>
 <body>
-<div class="container" ng-controller="CalController">
 
-    <h2>Reservations</h2>
-
-    <form role="form" name="dateForm" ng-submit="addReservation()">
-
-        <div class="row">
-
-            <div class="col-sm-6">
-                <label for="machine">Machine</label>
-                <div class="form-group" ng-class="{ 'has-error' : dateForm.machine.$invalid && !dateForm.machine.$pristine }">
-                    <select class="form-control" name="machine" ng-model="currentReservation.machine"
-                            ng-options="machine.name for machine in machines" required></select>
-                    <p ng-show="dateForm.machine.$invalid && !dateForm.machine.$pristine" class="help-block">Machine is required.</p>
-                </div>
-            </div>
-            
-            <div class="col-sm-6">
-                <label for="tenant">Name</label>
-                <div class="form-group" ng-class="{ 'has-error' : dateForm.name.$invalid && !dateForm.name.$pristine }">
-                    <select class="form-control" id="tenant" name="tenant" ng-model="currentReservation.tenant"
-                            ng-options="tenant.name for tenant in tenants" required></select>
-                    <p ng-show="dateForm.tenant.$invalid && !dateForm.tenant.$pristine" class="help-block">Name is required.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-
-        <div class="col-sm-6">
-            <label for="startDate">Start</label>
-            <div class="form-group" ng-class="{ 'has-error' : dateForm.startDate.$invalid && !dateForm.startDate.$pristine }">
-
-            <datetimepicker ng-model="currentReservation.startDate" id="startDate" name="startDate" show-weeks="showWeeks"
-                            hour-step="hourStep" minute-step="minuteStep" show-meridian="false"
-                            date-format="dd-MMM-yyyy" date-options="dateOptions" readonly-time="false" required></datetimepicker>
-                <p ng-show="dateForm.startDate.$invalid && !dateForm.startDate.$pristine" class="help-block">StartDate is required.</p>
-            </div>
-        </div>
-
-        <div class="col-sm-4">
-            <label for="endDate">End</label>
-                <div class="form-group" ng-class="{ 'has-error' : dateForm.endDate.$invalid && !dateForm.endDate.$pristine }">
-
-                <datetimepicker ng-model="currentReservation.endDate" id="endDate" name="endDate" show-weeks="showWeeks"
-                            hour-step="hourStep" minute-step="minuteStep" show-meridian="false"
-                            date-format="dd-MMM-yyyy" date-options="dateOptions" readonly-time="false" required></datetimepicker>
-                    <p ng-show="dateForm.endDate.$invalid && !dateForm.endDate.$pristine" class="help-block">EndDate is required.</p>
-                </div>
-
-        </div>
-
-        <div class="col-sm-2">
-            <br><br><br>
-            <button type="submit" class="btn btn-primary" ng-disabled="dateForm.$invalid">Add</button>
-        </div>
-            
-            </div>
-    </form>
-
-    <div ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
-
-
+<div class="container">
+    <h2><a href="admin.html">Admin</a></h2>
 </div>
+
+<div class="wrap">
+    <div class="span_of_3"><!-- start span_of_3 -->
+        <div class="span1_of_3"><!-- start span1_of_3 -->
+        </div>
+    </div>
+    <div class="span_reservation"><!-- start span2_of_3 -->
+        <div class="container" ng-controller="CalController">
+        <div class="rel_posts">
+            <h4>Add Reservation</h4>
+
+                <form role="form" name="dateForm" ng-submit="addReservation()">
+
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <label for="machine">Machine</label>
+                            <div class="form-group" ng-class="{ 'has-error' : dateForm.machine.$invalid && !dateForm.machine.$pristine }">
+                                <select class="form-control" name="machine" ng-model="currentReservation.machine"
+                                        ng-options="machine.name for machine in machines" required></select>
+                                <p ng-show="dateForm.machine.$invalid && !dateForm.machine.$pristine" class="help-block">Machine is required.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="tenant">Name</label>
+                            <div class="form-group" ng-class="{ 'has-error' : dateForm.name.$invalid && !dateForm.name.$pristine }">
+                                <select class="form-control" id="tenant" name="tenant" ng-model="currentReservation.tenant"
+                                        ng-options="tenant.name for tenant in tenants" required></select>
+                                <p ng-show="dateForm.tenant.$invalid && !dateForm.tenant.$pristine" class="help-block">Name is required.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <label for="startDate">Start</label>
+                            <div class="form-group" ng-class="{ 'has-error' : dateForm.startDate.$invalid && !dateForm.startDate.$pristine }">
+
+                                <datetimepicker ng-model="currentReservation.startDate" id="startDate" name="startDate" show-weeks="showWeeks"
+                                                hour-step="hourStep" minute-step="minuteStep" show-meridian="false"
+                                                date-format="dd-MMM-yyyy" date-options="dateOptions" readonly-time="false" required></datetimepicker>
+                                <p ng-show="dateForm.startDate.$invalid && !dateForm.startDate.$pristine" class="help-block">StartDate is required.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="endDate">End</label>
+                            <div class="form-group" ng-class="{ 'has-error' : dateForm.endDate.$invalid && !dateForm.endDate.$pristine }">
+
+                                <datetimepicker ng-model="currentReservation.endDate" id="endDate" name="endDate" show-weeks="showWeeks"
+                                                hour-step="hourStep" minute-step="minuteStep" show-meridian="false"
+                                                date-format="dd-MMM-yyyy" date-options="dateOptions" readonly-time="false" required></datetimepicker>
+                                <p ng-show="dateForm.endDate.$invalid && !dateForm.endDate.$pristine" class="help-block">EndDate is required.</p>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-2">
+                            <br><br><br>
+                            <button type="submit" class="btn btn-primary" ng-disabled="dateForm.$invalid">Add</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        <br><br>
+        <div class="span_calendar">
+            <div class="rel_posts">
+            <h4>Calendar</h4>
+                <div ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    <div class="span3_of_3 left"><!-- start span3_of_3 -->
+
+
+    </div>
+        <div class="clear"></div>
+    <div class="clear"></div>
+
+</div><!-- end span_of_3 -->
 </body>
 </html>

@@ -1,163 +1,207 @@
 <!DOCTYPE html>
+
 <html ng-app="washFritzApp">
 <head lang="en">
     <meta charset="UTF-8">
     <title>Admin</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="lib/bootstrap/bootstrap.min.js"></script>
-
-
     <script type="text/javascript" src="lib/angular/angular.min.js"></script>
     <script type="text/javascript" src="lib/angular/angular-resource.min.js"></script>
-
     <link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
-
-
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>
+    <link href="lib/layout/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="lib/layout/js/jquery.min.js"></script>
+    <script src="lib/layout/js/easyResponsiveTabs.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true,   // 100% fit in a container
+                closed: 'accordion', // Start closed if in accordion view
+                activate: function(event) { // Callback function if tab is switched
+                    var $tab = $(this);
+                    var $info = $('#tabInfo');
+                    var $name = $('span', $info);
+
+                    $name.text($tab.text());
+
+                    $info.show();
+                }
+            });
+
+            $('#verticalTab').easyResponsiveTabs({
+                type: 'vertical',
+                width: 'auto',
+                fit: true
+            });
+        });
+    </script>
+    <!----Calender -------->
+    <link rel="stylesheet" href="lib/layout/css/clndr.css" type="text/css" />
+    <script src="lib/layout/js/underscore-min.js"></script>
+    <script src= "lib/layout/js/moment-2.2.1.js"></script>
+    <script src="lib/layout/js/clndr.js"></script>
+    <script src="lib/layout/js/site.js"></script>
+    <!----End Calender -------->
 </head>
 <body>
 
-<div class="container">
-    <section ng-app="tabCtrl" ng-controller="TabController as tab">
-        <ul class="nav nav-pills">
-            <li ng-class="{active:tab.isSet(1)}"><a href ng-click="tab.setTab(1)">Machines</a></li>
-            <li ng-class="{active:tab.isSet(2)}"><a href ng-click="tab.setTab(2)">Tenants</a></li>
-            <li ng-class="{active:tab.isSet(3)}"><a href ng-click="tab.setTab(3)">Reservations</a></li>
-        </ul>
 
-        <div ng-show="tab.isSet(1)">
-            <div class="container" ng-controller="MachineListController">
-                <h2>Machine List</h2>
+<div class="wrap">
+    <div class="span_of_3"><!-- start span_of_3 -->
+        <div class="span1_of_3"><!-- start span1_of_3 -->
 
-                <table class="table table-hover">
-                    <thead>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th></th>
-                    </thead>
-                    <tr ng-repeat="machine in machines">
-                        <td>{{machine.name}}</td>
-                        <td>{{machine.type}}</td>
-                        <td>
-                            <button type="submit" class="btn btn-default" ng-click="deleteMachine(machine)">Delete</button>
-                        </td>
-                    </tr>
-                </table>
+            <div class="rel_posts">
+                <h4>Calendar</h4>
+                <!-- start calender  ---->
+                <div class="column_right_grid calender">
+                    <div class="cal1"><div class="clndr"><div class="clndr-controls"><div class="clndr-control-button"><p class="clndr-previous-button">previous</p></div><div class="month">November 2013</div><div class="clndr-control-button rightalign"><p class="clndr-next-button">next</p></div></div><table class="clndr-table" border="0" cellspacing="0" cellpadding="0"><thead><tr class="header-days"><td class="header-day">S</td><td class="header-day">M</td><td class="header-day">T</td><td class="header-day">W</td><td class="header-day">T</td><td class="header-day">F</td><td class="header-day">S</td></tr></thead><tbody><tr><td class="day past adjacent-month last-month calendar-day-2013-10-27"><div class="day-contents">27</div></td><td class="day past adjacent-month last-month calendar-day-2013-10-28"><div class="day-contents">28</div></td><td class="day past adjacent-month last-month calendar-day-2013-10-29"><div class="day-contents">29</div></td><td class="day past adjacent-month last-month calendar-day-2013-10-30"><div class="day-contents">30</div></td><td class="day past adjacent-month last-month calendar-day-2013-10-31"><div class="day-contents">31</div></td><td class="day past calendar-day-2013-11-01"><div class="day-contents">1</div></td><td class="day past calendar-day-2013-11-02"><div class="day-contents">2</div></td></tr><tr><td class="day past calendar-day-2013-11-03"><div class="day-contents">3</div></td><td class="day past calendar-day-2013-11-04"><div class="day-contents">4</div></td><td class="day past calendar-day-2013-11-05"><div class="day-contents">5</div></td><td class="day past calendar-day-2013-11-06"><div class="day-contents">6</div></td><td class="day past calendar-day-2013-11-07"><div class="day-contents">7</div></td><td class="day past calendar-day-2013-11-08"><div class="day-contents">8</div></td><td class="day past calendar-day-2013-11-09"><div class="day-contents">9</div></td></tr><tr><td class="day past event calendar-day-2013-11-10"><div class="day-contents">10</div></td><td class="day past event calendar-day-2013-11-11"><div class="day-contents">11</div></td><td class="day past event calendar-day-2013-11-12"><div class="day-contents">12</div></td><td class="day past event calendar-day-2013-11-13"><div class="day-contents">13</div></td><td class="day past event calendar-day-2013-11-14"><div class="day-contents">14</div></td><td class="day past calendar-day-2013-11-15"><div class="day-contents">15</div></td><td class="day past calendar-day-2013-11-16"><div class="day-contents">16</div></td></tr><tr><td class="day past calendar-day-2013-11-17"><div class="day-contents">17</div></td><td class="day past calendar-day-2013-11-18"><div class="day-contents">18</div></td><td class="day past calendar-day-2013-11-19"><div class="day-contents">19</div></td><td class="day past calendar-day-2013-11-20"><div class="day-contents">20</div></td><td class="day past event calendar-day-2013-11-21"><div class="day-contents">21</div></td><td class="day past event calendar-day-2013-11-22"><div class="day-contents">22</div></td><td class="day today event calendar-day-2013-11-23"><div class="day-contents">23</div></td></tr><tr><td class="day calendar-day-2013-11-24"><div class="day-contents">24</div></td><td class="day calendar-day-2013-11-25"><div class="day-contents">25</div></td><td class="day calendar-day-2013-11-26"><div class="day-contents">26</div></td><td class="day calendar-day-2013-11-27"><div class="day-contents">27</div></td><td class="day calendar-day-2013-11-28"><div class="day-contents">28</div></td><td class="day calendar-day-2013-11-29"><div class="day-contents">29</div></td><td class="day calendar-day-2013-11-30"><div class="day-contents">30</div></td></tr></tbody></table></div></div>
+                </div>
+                <!-- end calender  ---->
+
+            </div>
+
+            <br>
 
 
-                <div class="row">
+            <div ng-controller="MachineListController">
+            <div class="rel_posts">
+                <h4>Machine List</h4>
 
-                    <div class="col-sm-6">
+                    <table class="table table-hover">
+                        <tr ng-repeat="machine in machines">
+                            <td>{{machine.name}}</td>
+                            <td>{{machine.type}}</td>
+                            <td>
+                                <button type="submit" class="btn btn-default" ng-click="deleteMachine(machine)">Delete</button>
+                            </td>
+                        </tr>
+                    </table>
+             </div>
+            <br>
+
+            <div class="rel_posts">
+                <h4>Add Machines</h4>
                         <!-- =================================================================== -->
                         <!-- FORM ============================================================== -->
                         <!-- =================================================================== -->
-                        <h2>Add Machine</h2>
-                        <form name="machineForm" ng-submit="addMachine()" novalidate>
 
+                        <form name="machineForm" ng-submit="addMachine()" novalidate>
                             <!-- Machine -->
                             <div class="form-group" ng-class="{ 'has-error' : machineForm.name.$invalid && !machineForm.name.$pristine }">
                                 <label>Machine name</label>
                                 <input type="text" name="name" class="form-control" ng-model="currentMachine.name" required>
                                 <p ng-show="machineForm.name.$invalid && !machineForm.name.$pristine" class="help-block">Machine is required.</p>
                             </div>
-
                             <!-- Type -->
                             <div class="form-group" ng-class="{ 'has-error' : machineForm.type.$invalid && !machineForm.type.$pristine }">
                                 <label>Type</label>
                                 <input type="text" name="type" class="form-control" ng-model="currentMachine.type" required>
                                 <p ng-show="machineForm.type.$invalid && !machineForm.type.$pristine" class="help-block">Type is required.</p>
                             </div>
-
                             <button type="submit" class="btn btn-primary" ng-disabled="machineForm.$invalid">Submit</button>
-
                         </form>
+
+            </div>
+            </div>
+
+<br>
+
+
+
+        </div>
+        <div class="span2_of_3 left"><!-- start span2_of_3 -->
+
+            <div class="rel_posts">
+                <h4>Reservation List</h4>
+
+
+                <div class="container" ng-controller="ReservationListController">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <table class="table table-hover">
+                                <tr ng-repeat="reservation in reservations">
+                                    <td>{{reservation.machine.name}}</td>
+                                    <td>{{reservation.tenant.name}}</td>
+                                    <td>{{reservation.startDate | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+                                    <td>{{reservation.endDate | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+                                    <td>
+                                        <button type="submit" class="btn btn-default" ng-click="deleteReservation(reservation)">Delete</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
-
             </div>
+            <br>
+
+            <div ng-controller="TenantListController">
+        <div class="rel_posts">
+                <h4>Tenant List</h4>
+
+                            <table class="table table-hover">
+                                <tr ng-repeat="tenant in tenants">
+                                    <td>{{tenant.name}}</td>
+                                    <td>{{tenant.address}}</td>
+                                    <td>
+                                        <button type="submit" class="btn btn-default" ng-click="deleteTenant(tenant)">Delete</button>
+                                    </td>
+                                </tr>
+                            </table>
         </div>
-        <div ng-show="tab.isSet(2)">
-
-            <div class="container" ng-controller="TenantListController">
-                <h2>Tenant List</h2>
-
-                <table class="table table-hover">
-                    <thead>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th></th>
-                    </thead>
-                    <tr ng-repeat="tenant in tenants">
-                        <td>{{tenant.name}}</td>
-                        <td>{{tenant.address}}</td>
-                        <td>
-                            <button type="submit" class="btn btn-default" ng-click="deleteTenant(tenant)">Delete</button>
-                        </td>
-                    </tr>
-                </table>
+            <br>
+        <div class="rel_posts">
+                <h4>Add Tenant</h4>
 
 
-                <div class="row">
 
-                        <div class="col-sm-6">
-                            <!-- =================================================================== -->
-                            <!-- FORM ============================================================== -->
-                            <!-- =================================================================== -->
-                            <h2>Add Tenant</h2>
-                            <form name="tenantForm" ng-submit="addTenant()" novalidate>
+                        <!-- =================================================================== -->
+                        <!-- FORM ============================================================== -->
+                        <!-- =================================================================== -->
+                        <form name="tenantForm" ng-submit="addTenant()" novalidate>
+                            <!-- NAME -->
+                            <div class="form-group" ng-class="{ 'has-error' : tenantForm.name.$invalid && !tenantForm.name.$pristine }">
+                                <label>Name</label>
+                                <input type="text" name="name" class="form-control" ng-model="currentTenant.name" required>
+                                <p ng-show="tenantForm.name.$invalid && !tenantForm.name.$pristine" class="help-block">Name is required.</p>
+                            </div>
+                            <!-- Address -->
+                            <div class="form-group" ng-class="{ 'has-error' : tenantForm.address.$invalid && !tenantForm.address.$pristine }">
+                                <label>Address</label>
+                                <input type="text" name="address" class="form-control" ng-model="currentTenant.address" ng-minlength="3" ng-maxlength="15">
+                                <p ng-show="tenantForm.address.$error.minlength" class="help-block">Address is too short.</p>
+                                <p ng-show="tenantForm.address.$error.maxlength" class="help-block">Address is too long.</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary" ng-disabled="tenantForm.$invalid">Submit</button>
+                        </form>
 
-                                <!-- NAME -->
-                                <div class="form-group" ng-class="{ 'has-error' : tenantForm.name.$invalid && !tenantForm.name.$pristine }">
-                                    <label>Name</label>
-                                    <input type="text" name="name" class="form-control" ng-model="currentTenant.name" required>
-                                    <p ng-show="tenantForm.name.$invalid && !tenantForm.name.$pristine" class="help-block">Name is required.</p>
-                                </div>
-
-                                <!-- Address -->
-                                <div class="form-group" ng-class="{ 'has-error' : tenantForm.address.$invalid && !tenantForm.address.$pristine }">
-                                    <label>Address</label>
-                                    <input type="text" name="address" class="form-control" ng-model="currentTenant.address" ng-minlength="3" ng-maxlength="15">
-                                    <p ng-show="tenantForm.address.$error.minlength" class="help-block">Address is too short.</p>
-                                    <p ng-show="tenantForm.address.$error.maxlength" class="help-block">Address is too long.</p>
-                                </div>
-
-                                <button type="submit" class="btn btn-primary" ng-disabled="tenantForm.$invalid">Submit</button>
-
-                            </form>
-                        </div>
-                </div>
-            </div>
         </div>
-        <div ng-show="tab.isSet(3)">
-
-            <div class="container" ng-controller="ReservationListController">
-                <h2>Reservation List</h2>
-
-                <table class="table table-hover">
-                    <thead>
-                    <th>Machine</th>
-                    <th>Tenant</th>
-                    <th>from</th>
-                    <th>to</th>
-                    <th></th>
-                    </thead>
-                    <tr ng-repeat="reservation in reservations">
-                        <td>{{reservation.machine.name}}</td>
-                        <td>{{reservation.tenant.name}}</td>
-                        <td>{{reservation.startDate | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
-                        <td>{{reservation.endDate | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
-                        <td>
-                            <button type="submit" class="btn btn-default" ng-click="deleteReservation(reservation)">Delete</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
         </div>
-    </section>
-</div>
+
+            <br>
+
+
+
+
+        </div>
+        <div class="span3_of_3 left"><!-- start span3_of_3 -->
+
+        </div>
+
+
+    </div>
+
+    </div><!-- end span_of_3 -->
+
+
 
 
 </body>

@@ -1,6 +1,6 @@
-ch.bfh.bti7516.waschfritz
+ch.bfh.bti7515.waschfritz
 =========================
-Sample Project for BFH Module BTI7516 (Java Soft. Entw. mit Open Source 2)
+Project for BFH Module BTI7515 (Java Software. Entwicklung mit Open Source 1)
 
 Goal
 ----
